@@ -1,5 +1,5 @@
-**Postgres server : 192.168.4.210 **
-** Barman Server : 12.168.4.25 **
+*** Postgres server : 192.168.4.210 ***
+*** Barman Server : 12.168.4.25 ***
 
 
 # barman Side
@@ -36,27 +36,27 @@ ssh_command = ssh postgres@192.168.4.210
 retention_policy = RECOVERY WINDOW OF 2 WEEKS
 
 
-
- **Recover Backup from Barman**
-
- barman recover --remote-ssh-command "ssh postgres@192.168.4.210"  --target-time="2022-12-09 22:02:39.970740+00:00
-" pgsql  20221209T220233  /var/lib/postgresql/14/data
-
 5- Verify Barman conectivity
 ```
  barman check pgsql
 ```
+![image](https://user-images.githubusercontent.com/88557305/206809977-518b0953-2889-4986-98a0-39b217d38ad6.png)
+
 6- take backup 
 ```
 barman backup pgsql
 ```
+![image](https://user-images.githubusercontent.com/88557305/206810138-151853b6-1f22-470a-90ce-8ce0a535862c.png)
+
+
 7- barman commands
 ```
  barman list-backup pgsql (servername which defiend in barman.conf)
 barman show-backup pgsql backup_id
-
-
 ```
+![image](https://user-images.githubusercontent.com/88557305/206810281-92781b77-6850-4577-b0ca-6ef4438a863a.png)
+
+
 8- recover to specified time 
 we can see the backup time in barman show-backup pgsql backup_id
 ```
@@ -64,6 +64,8 @@ we can see the backup time in barman show-backup pgsql backup_id
 " pgsql  20221209T220233  /var/lib/postgresql/14/data
 
 ```
+![image](https://user-images.githubusercontent.com/88557305/206809875-0828d913-48df-4047-b13b-6022baa9756d.png)
+
 
 # Postgres server Side 
 
@@ -117,4 +119,7 @@ archive_command = 'rsync -a %p barman@192.168.4.25:/var/lib/barman/pgsql/incomin
 ```
 sudo systemctl restart postgresql
 
-
+*** Postgres wal directory  
+/var/lib/postgresql/14/main/pg_wal/
+***
+![image](https://user-images.githubusercontent.com/88557305/206810056-4a00b831-0ba7-4c2b-953d-be6a6893550e.png)
