@@ -66,6 +66,15 @@ we can see the backup time in barman show-backup pgsql backup_id
 ```
 ![image](https://user-images.githubusercontent.com/88557305/206809875-0828d913-48df-4047-b13b-6022baa9756d.png)
 
+*** We can Schedule backup from crontab  ***
+```
+sudo -i -u barman
+crontab -e
+# To run a backup daily at 3:30, add the following line to the cron tab and save it:
+30 03 * * * /usr/bin/barman backup pgsql
+```
+
+------------------------------------------------------------------------------------------
 
 # Postgres server Side 
 
@@ -123,3 +132,4 @@ sudo systemctl restart postgresql
 /var/lib/postgresql/14/main/pg_wal/
 ***
 ![image](https://user-images.githubusercontent.com/88557305/206810056-4a00b831-0ba7-4c2b-953d-be6a6893550e.png)
+
