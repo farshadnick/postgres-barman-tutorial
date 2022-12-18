@@ -133,3 +133,36 @@ sudo systemctl restart postgresql
 ***
 ![image](https://user-images.githubusercontent.com/88557305/206810056-4a00b831-0ba7-4c2b-953d-be6a6893550e.png)
 
+# Barman Monitoring
+```
+pip3 install barman-exporter
+```
+vim /etc/systemd/system/barman-exporter.service
+```
+[Unit]
+Description=Barman Exporter
+After=network-online.target
+
+[Service]
+Type=simple
+User=barman
+Group=barman
+ExecStart=/usr/local/bin/barman-exporter  -l 192.168.4.25:9780 pgsql
+SyslogIdentifier=barman_exporter
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+in prometheus config 
+```
+  - job_name: 'barman'
+    metrics_path:
+    static_configs:
+      - targets:
+        - 192.168.4.25:9780
+
+```
+
+
+![image](https://user-images.githubusercontent.com/88557305/208292440-23a73a4f-ef44-473c-9ab9-1fd236699eb4.png)
