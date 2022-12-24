@@ -41,6 +41,10 @@ retention_policy = RECOVERY WINDOW OF 2 WEEKS
 ```
  barman check pgsql
 ```
+5-1 if you dont have a Enough data run this command to archive wall 
+```
+barman switch-xlog --force --archive pgsql 
+```
 ![image](https://user-images.githubusercontent.com/88557305/206809977-518b0953-2889-4986-98a0-39b217d38ad6.png)
 
 6- take backup 
@@ -52,6 +56,7 @@ barman backup pgsql
 
 7- barman commands
 ```
+barman show-server pgsql | grep incoming_wals_directory
  barman list-backup pgsql (servername which defiend in barman.conf)
 barman show-backup pgsql backup_id
 ```
