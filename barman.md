@@ -29,12 +29,13 @@ ssh-copy-id postgres@192.168.4.210
 
 vim /etc/barman.d/pgsql.conf
 
+```
 [pgsql]
 description =  "Postgres server"
 conninfo = host=192.168.4.210 user=barman dbname=postgres
 ssh_command = ssh postgres@192.168.4.210
 retention_policy = RECOVERY WINDOW OF 2 WEEKS
-
+```
 
 5- Verify Barman conectivity
 ```
