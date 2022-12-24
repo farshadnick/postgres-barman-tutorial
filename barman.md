@@ -33,6 +33,8 @@ vim /etc/barman.d/pgsql.conf
 [pgsql]
 description =  "Postgres server"
 conninfo = host=192.168.4.210 user=barman dbname=postgres
+archiver=on
+backup_method = rsync
 ssh_command = ssh postgres@192.168.4.210
 retention_policy = RECOVERY WINDOW OF 2 WEEKS
 ```
