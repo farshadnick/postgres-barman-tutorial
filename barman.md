@@ -3,6 +3,14 @@
 
 
 # barman Side
+# barman Backup Strategy 
+
+1- Wall Streaming
+![image](https://user-images.githubusercontent.com/88557305/209461497-918d6303-fbd8-4d21-9de5-d9b4d1eaf63f.png)
+
+2- Rsync 
+![image](https://user-images.githubusercontent.com/88557305/209461486-3915c994-24dd-49dd-97ff-083125c27303.png)
+
 
 1- instalation
 ```
