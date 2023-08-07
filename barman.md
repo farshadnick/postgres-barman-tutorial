@@ -1,5 +1,5 @@
-*** Postgres server : 192.168.4.210 ***
-*** Barman Server : 12.168.4.25 ***
+*** Postgres server : 192.168.4.14 ***
+*** Barman Server : 12.168.4.13 ***
 
 
 # barman Side
@@ -21,7 +21,7 @@ sudo apt-get install barman
 ```
 sudo passwd barman
 sudo -i -u barman
-echo "pgsql:5432:*:barman:password" >> ~/.pgpass
+echo "1921.68.4.14:5432:*:barman:password" >> ~/.pgpass
 ```
 
 3- Postgres server SSH Key config 
@@ -51,7 +51,7 @@ retention_policy = RECOVERY WINDOW OF 2 WEEKS
 ```
  barman check pgsql
 ```
-5-1 if you dont have a Enough data run this command to archive wall 
+5-1 if you dont have a Enough data run this command to archive wall (this should be done before barman check)
 ```
 barman switch-xlog --force --archive pgsql 
 ```
@@ -94,9 +94,10 @@ crontab -e
 
 # Postgres server Side 
 
-1- creating user barman in postgres server
+1- creating user barman for  postgres server & Linux 
 
 ```
+adduser barman
 sudo -i -u postgres
 createuser --interactive -P barman
 
@@ -135,7 +136,7 @@ Postgres will send archive to barman
 
  vim /etc/postgresql/14/main/postgresql.conf
 ```
-
+listen_addresses = '0.0.0.0' 
 wal_level = archive
 archive_mode = on
 archive_command = 'rsync -a %p barman@192.168.4.25:/var/lib/barman/pgsql/incoming/%f'
